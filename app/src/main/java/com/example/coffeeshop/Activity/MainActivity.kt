@@ -1,14 +1,12 @@
-package com.example.coffeeshop
+package com.example.coffeeshop.Activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.OnApplyWindowInsetsListener
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.coffeeshop.Adapter.CategoryAdapter
 import com.example.coffeeshop.ViewModel.MainViewModel
 import com.example.coffeeshop.databinding.ActivityMainBinding
 
@@ -23,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBanner()
+        initCategory()
     }
 
     private fun initBanner() {
@@ -34,5 +33,20 @@ class MainActivity : AppCompatActivity() {
             binding.progressBarBanner.visibility = View.GONE
         }
         viewModel.loadBanner()
+
+    }
+
+    private fun initCategory(){
+        binding.progressBarCategory.visibility = View.VISIBLE
+        viewModel.loadCategory().observeForever {
+            binding.recyclerViewCat.layoutManager =
+                LinearLayoutManager(this@MainActivity
+                    ,LinearLayoutManager.HORIZONTAL
+                    , false)
+
+            binding.recyclerViewCat.adapter = CategoryAdapter(it)
+            binding.progressBarCategory.visibility = View.GONE
+        }
+        viewModel.loadCategory()
     }
 }

@@ -6,7 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.coffeeshop.MainActivity
+import com.example.coffeeshop.Activity.MainActivity
 import com.example.coffeeshop.R
 import com.example.coffeeshop.databinding.ActivitySplashBinding
 
