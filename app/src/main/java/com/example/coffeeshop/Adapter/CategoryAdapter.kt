@@ -1,17 +1,20 @@
 package com.example.coffeeshop.Adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.coffeeshop.Activity.ItemListActivity
 import com.example.coffeeshop.Domain.CategoryModel
 import com.example.coffeeshop.R
 import com.example.coffeeshop.databinding.ViewholderCategoryBinding
 
 class CategoryAdapter(val items: MutableList<CategoryModel>)
     : RecyclerView.Adapter<CategoryAdapter.Viewholder>() {
-
     private var selectedPosition = -1
     private var lastSelectedPosition = -1
 
@@ -37,6 +40,14 @@ class CategoryAdapter(val items: MutableList<CategoryModel>)
                 selectedPosition = adapterPosition
                 notifyItemChanged(lastSelectedPosition)
                 notifyItemChanged(selectedPosition)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(holder.itemView.context, ItemListActivity::class.java).apply{
+                        putExtra("id", item.id.toString())
+                        putExtra("title",item.title)
+                    }
+                    ContextCompat.startActivity(holder.itemView.context,intent,null)
+                },500)
             }
         }
 
@@ -50,4 +61,5 @@ class CategoryAdapter(val items: MutableList<CategoryModel>)
     }
 
     override fun getItemCount(): Int = items.size
+
 }
