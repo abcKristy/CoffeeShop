@@ -56,7 +56,7 @@ class CartAdapter(
         }
 
         holder.binding.minusEachItem.setOnClickListener {
-            managmentCart.plusItem(listItemsSelected,position,object : ChangeNumberItemsListener{
+            managmentCart.minusItem(listItemsSelected,position,object : ChangeNumberItemsListener{
                 override fun onChanged() {
                     notifyDataSetChanged()
                     changeNumberItemsListener?.onChanged()
